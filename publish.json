@@ -1,8 +1,8 @@
 {
-    "title": "Title of Project",
-    "info": "Add info about project",
-    "coordinates": [38, -84.5],
-    "author": "Do you want to add your name?",
+    "title": "Mapping Mumbai's city government elections- 2017",
+    "info": "The Brihnmumbai Municipal Corporation (BMC) is the local city government for Mumbai city. Elections happen every 5 years, and the next elections are due in April 2022. This map provides a quick recap of the 2017 results",
+    "coordinates": [19.076, 72.877],
+    "author": "sanjana",
     "link": "https://sanjana-krish.github.io/mumbai-elections/"
 
 }
