@@ -120,6 +120,25 @@
     cursor: pointer;
     }
 
+    #legend-button {
+    padding: 8px 5px;
+    font-size: 0.9em;
+    font-weight: bolder;
+    /* Style matches Leaflet controls */
+    border: 2px solid rgba(244, 244, 244, 0.2);
+    background: rgba(100, 100, 100, 0.9);
+    color: rgba(244, 244, 244, 0.8);
+    border-radius: 5px;
+    /* Position is fixed next to the zoom bar */
+    position: fixed;
+    top: 54px;
+    right: 52px;
+    /* Draw it on top of all elements */
+    z-index: 9999;
+    /* Cursor change on hover -- doesn't work on touch screensn */
+    cursor: pointer;
+    }
+
     #footer {
         width: 33%;
         right:0; /*to put box on the right of the screen*/
@@ -154,6 +173,15 @@
         margin: 10px;
     }
 
+    /* Don't display info block when window is very small */
+		@media screen and (max-width: 900px) {
+
+        #footer {
+          width: 100%;
+          background: rgba(244, 244, 244, 0.95);
+        }
+      }
+
   </style>
 </head>
 
@@ -161,7 +189,7 @@
   <div id='map'></div>
 
   <button id="info-button" onclick="myInfo()">Information</button>
-  <button id="legend-button" onclick="myInfo2()">Legend</button>
+  <button id="legend-button" onclick="legendView()">Legend</button>
 
   <div id='footer'>
       <div><img src="https://uky-gis.github.io/graphics/logo-color-400px.png" class="footer-img">
@@ -407,6 +435,8 @@
       }
     } // end getColor
 
+    const legends = []
+
     function drawLegend(breaks, j) {
       // first verify the parameter's value
       console.log(breaks);
@@ -442,8 +472,21 @@
         return div;
       };
       // add the legend to the map
+      legends.push(legend)
       legend.addTo(map);
     }
+
+    function legendView (){
+      legends.forEach(function(legend) {
+        // if _map property exists on the legend (i.e., it's on the map), 
+        // then remove the legend from the map
+        // else add the legend to the map
+        legend._map ? map.removeControl(legend) : map.addControl(legend);
+        });
+    }
+
+    legendView();
+    
 
     /* --------------- Toggle on/off info footer content ---------------  */
     var clicked = false // start with false condition
